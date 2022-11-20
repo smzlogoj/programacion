@@ -2,18 +2,18 @@
 
 What is the largest prime factor of the number 600851475143 ? =#
 
-function isPrime(number)
-    prime = false
-    while (!prime & number > 2)
-        
-    end
-    return prime
-end
 
 function largestPrimeFactor(number)
     factor = 2
-
+    while number != 1
+        if number % factor != 0
+            factor += 1
+        else
+            number = number / factor
+        end
+    end
+    return factor
 end
 
-number = 13195
+number = 600851475143
 println(largestPrimeFactor(number))
