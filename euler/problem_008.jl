@@ -46,4 +46,22 @@ str = "73167176531330624919225119674426574742355349194934
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450"
 
-length(str)
+str = replace(str, "\n" => "")
+
+function largestProduct(str, adjacent)
+    product = 1
+    for h = 1 : length(str) - adjacent + 1
+        substr = str[h : h + adjacent - 1]
+        product2 = 1
+        for i = 1 : length(substr)
+            product2 = product2 * parse(Int64, substr[i : i])
+        end
+        if product < product2
+            product = product2
+        end
+    end
+
+    return product
+end
+
+println(largestProduct(str, 13))
