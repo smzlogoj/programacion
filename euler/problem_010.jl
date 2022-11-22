@@ -2,26 +2,27 @@
 
 Find the sum of all the primes below two million. =#
 
-function isPrime(number)
-    prime = true
-    contador = 2
-    while (prime == true) & (contador < number)
-        if number % contador == 0
-            prime = false
-        end
-        contador = contador + 1
+primes = [3]
+pCount = 2
+pCheck = 3
+cSqrt = 3
+
+while pCheck<2_000_000
+    global pCheck+=2
+    while cSqrt*cSqrt<pCheck
+        global cSqrt+=2
     end
-    return prime
+    for p in primes
+        if p > cSqrt
+            break
+        end
+        if pCheck%p == 0
+            @goto endloop
+        end
+    end
+    push!(primes, pCheck)
+    global pCount += 1
+    @label endloop
 end
 
-function summationOfPrimes(number)
-    sum = 0
-    for h = 2 : number
-        if isPrime(h)
-            sum += h
-        end
-    end
-    println(sum)
-end
-
-summationOfPrimes(2000000)
+println(sum(primes)+2)
