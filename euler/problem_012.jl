@@ -19,30 +19,28 @@ five divisors.
 What is the value of the first triangle number to have over 
 five hundred divisors? =#
 
-function factorize(number)
-    factor = 1
-    vector = Int32[]
-    while factor <= number
-        if number % factor == 0
-            #### es un factor
-            push!(vector, factor)
-        end
-        factor += 1
-    end
-    return vector
-end
+
 
 function highlyDivisibleTriangular(divisors)
-    cont = 1
-    nfactor = 1
-    sum = 0
-    while nfactor < divisors
-        sum += cont
-        nfactor = length(factorize(sum))
-        cont += 1
-    end
-    println(sum) 
-    
+    t = 1
+    a = 1
+    cnt = 0
+    while cnt <= divisors
+        cnt = 0
+        a = a + 1
+        t = t + a
+        ttx = sqrt(t)
+        for h = 1 : ttx
+            if t % h == 0
+                cnt = cnt + 2
+            end
+        end
+        if t == ttx * ttx 
+            cnt = cnt - 1
+        end
+    end    
+
+    println(t)
 end
 
 highlyDivisibleTriangular(500)
